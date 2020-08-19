@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+    <!--<pluginGroups>
+        <pluginGroup>com.oracle.weblogic</pluginGroup>
+    </pluginGroups>-->
+
+    <profiles>
+        <profile>
+            <id>nexus</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+
+            <repositories>
+                <repository>
+                    <id>snapshots-test</id>
+                    <url>http://nexus.bch.bancodechile.cl:8081/repository/snapshots-test/</url>
+                    <layout>default</layout>
+                    <releases>
+                        <enabled>false</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+                <repository>
+                    <id>release-test</id>
+                    <url>http://nexus.bch.bancodechile.cl:8081/repository/release-test/</url>
+                    <layout>default</layout>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                </repository>
+                <repository>
+                    <id>grupo-automatizacion-cdn</id>
+                    <url>http://nexus.bch.bancodechile.cl:8081/repository/grupo-automatizacion-cdn/</url>
+                    <layout>default</layout>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+                <repository>
+                    <id>madeUp</id>
+                    <url>http://central</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>madeUp</id>
+                    <url>http://central</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </pluginRepository>
+            </pluginRepositories>
+        
+        </profile>
+    <profile>
+            <id>redhat-techpreview-all-repository</id>
+            <repositories>
+                <repository>
+                    <id>redhat-techpreview-all-repository</id>
+                    <name>Red Hat Tech Preview repository (all)</name>
+                    <url>http://maven.repository.redhat.com/techpreview/all/</url>
+                    <layout>default</layout>
+                    <releases>
+                        <enabled>true</enabled>
+                        <updatePolicy>never</updatePolicy>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
+                        <updatePolicy>never</updatePolicy>
+                    </snapshots>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>redhat-techpreview-all-repository</id>
+                    <name>Red Hat Tech Preview repository (all)</name>
+                    <url>http://maven.repository.redhat.com/techpreview/all/</url>
+                    <layout>default</layout>
+                    <releases>
+                        <enabled>true</enabled>
+                        <updatePolicy>never</updatePolicy>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
+                        <updatePolicy>never</updatePolicy>
+                    </snapshots>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+    </profiles>
+
+    <mirrors>
+        <mirror>
+            <id>nexus</id>
+            <mirrorOf>madeUp</mirrorOf>
+            <url>http://nexus.bch.bancodechile.cl:8081/repository/maven-public/</url>
+        </mirror>
+        <mirror>
+            <id>maven-central</id>
+            <name>maven-central</name>
+            <url>http://nexus.bch.bancodechile.cl:8081/repository/maven-central/</url>
+            <mirrorOf>central</mirrorOf>
+        </mirror>
+    </mirrors>
+
+</settings>

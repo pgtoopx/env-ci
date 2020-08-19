@@ -17,6 +17,8 @@ services:
       - jenkins-net
   slave:
     build: ./jenkins-slave
+  slave-maven:
+    build: ./jenkins-slave-maven
   proxy:
     build: ./docker-proxy
     volumes:

@@ -10,6 +10,7 @@ RUN yum install -y git && \
     yum install -y wget && \
 	yum install -y java-1.8.0-openjdk && \
 	yum install -y sudo && \
+	yum install -y maven && \
 	yum clean all
 
 ARG user=jenkins
@@ -22,6 +23,8 @@ ENV JENKINS_HOME /home/${user}
 # Jenkins is run with user `jenkins`, uid = 1000
 RUN groupadd -g ${gid} ${group} \
     && useradd -d "$JENKINS_HOME" -u ${uid} -g ${gid} -m -s /bin/bash ${user}
+
+COPY files/settings.xml  /usr/share/maven/conf/
 
 RUN chown -R ${user}:${user} /home/${user}
 

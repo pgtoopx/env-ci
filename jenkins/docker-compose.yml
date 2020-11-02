@@ -1,7 +1,7 @@
 version: '3'
 services:
   master:
-    build: ./jenkins-master
+    build: jenkins-server/jenkins-master
     ports:
       - "50000:50000"
     volumes:
@@ -9,16 +9,29 @@ services:
       - jenkins-data:/var/jenkins_home
     networks:
       - jenkins-net
+    healthcheck:
+      test: ["CMD", "/docker-healthcheck.sh"]
+      interval: 1m
+      timeout: 10s
+      retries: 3
+      start_period: 1m
   nginx:
-    build: ./jenkins-nginx
+    build: jenkins-server/jenkins-nginx
     ports:
       - "80:80"
     networks:
       - jenkins-net
-  slave:
-    build: ./jenkins-slave
-  slave-maven:
-    build: ./jenkins-slave-maven
+  slave-ubuntu:
+    build: slaves/jenkins-slave-ubuntu
+    extra_hosts:
+      - lablnx392:200.14.140.170
+      - LABLNX392:200.14.140.170
+      - loginmulticanalbch:152.139.147.83
+      - tasacionesweb:152.139.146.127
+      - tasacioneswls:152.139.146.127
+      - login.qa.labchile.cl:200.14.140.170
+      - portalpersonas.qa.labchile.cl:200.14.132.93
+      - portalempresas.qa.labchile.cl:200.14.132.96
   proxy:
     build: ./docker-proxy
     volumes:
@@ -32,4 +45,5 @@ volumes:
   jenkins-log:
 networks:
   jenkins-net:
+
 

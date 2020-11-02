@@ -1,17 +1,13 @@
-FROM centos:centos7
+FROM ubuntu
 LABEL maintainer="pgtoopx"
 
-# Install Essentials
-RUN yum update -y && \
-    yum clean all
-
-# Install Packages
-RUN yum install -y git && \
-    yum install -y wget && \
-	yum install -y java-1.8.0-openjdk && \
-	yum install -y sudo && \
-	yum install -y maven && \
-	yum clean all
+RUN  apt-get update \
+  && apt-get install -y wget \
+  && apt-get install -y git \
+  && apt-get install -y sudo \
+  && apt-get install -y openjdk-8-jdk-headless \
+  && apt-get install -y maven \
+  && rm -rf /var/lib/apt/lists/*
 
 ARG user=jenkins
 ARG group=jenkins
@@ -24,11 +20,14 @@ ENV JENKINS_HOME /home/${user}
 RUN groupadd -g ${gid} ${group} \
     && useradd -d "$JENKINS_HOME" -u ${uid} -g ${gid} -m -s /bin/bash ${user}
 
+COPY files/settings.xml  /usr/share/maven/conf/
+
 RUN chown -R ${user}:${user} /home/${user}
 
 # Add the jenkins user to sudoers
 RUN echo "${user}    ALL=(ALL)    ALL" >> etc/sudoers
 
+WORKDIR ${JENKINS_HOME}
+
 # Set Name Servers
-COPY /files/resolv.conf /etc/resolv.conf
-COPY files/settings.xml /usr/share/maven/ref
+#COPY /files/resolv.conf /etc/resolv.conf

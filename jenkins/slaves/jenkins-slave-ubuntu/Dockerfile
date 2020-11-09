@@ -3,6 +3,7 @@ LABEL maintainer="pgtoopx"
 
 RUN  apt-get update \
   && apt-get install -y wget \
+  && apt-get install -y iputils-ping \
   && apt-get install -y git \
   && apt-get install -y sudo \
   && apt-get install -y openjdk-8-jdk-headless \

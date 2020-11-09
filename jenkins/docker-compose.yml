@@ -21,17 +21,8 @@ services:
       - "80:80"
     networks:
       - jenkins-net
-  slave-ubuntu:
+  slave-bch:
     build: slaves/jenkins-slave-ubuntu
-    extra_hosts:
-      - lablnx392:200.14.140.170
-      - LABLNX392:200.14.140.170
-      - loginmulticanalbch:152.139.147.83
-      - tasacionesweb:152.139.146.127
-      - tasacioneswls:152.139.146.127
-      - login.qa.labchile.cl:200.14.140.170
-      - portalpersonas.qa.labchile.cl:200.14.132.93
-      - portalempresas.qa.labchile.cl:200.14.132.96
   proxy:
     build: ./docker-proxy
     volumes:
